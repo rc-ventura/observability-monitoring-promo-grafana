@@ -1,24 +1,26 @@
 
+
+
+# Define a imagem base que será utilizada
 FROM harbor.sflabs.com.br/processo/petshop:latest
+#FROM golang:1.17-alpine
 
-# Define a pasta de trabalho do container
-WORKDIR /usr/src/app
+# Cria um diretório de trabalho para a aplicação
+WORKDIR /app
 
-# Copia o arquivo package.json para a pasta de trabalho
+# Copia o arquivo go.mod para o diretório de trabalho
+COPY go.mod .
 
-COPY package.json /usr/src/app/
+# Baixa as dependências necessárias
+RUN go mod download
 
-#Instala o node e faza atualização
-RUN apk add --update nodejs npm
-
-# Instala as dependências
-RUN npm install
-
-# Copia o código-fonte da aplicação para a pasta de trabalho
+# Copia todo o código fonte para o diretório de trabalho
 COPY . .
 
-# Define a porta que a aplicação vai escutar
-EXPOSE 3000
+# Compila a aplicação
+RUN go build -o app
 
-# Define o comando que será executado quando o container for iniciado
-CMD ["npm", "start"]
+# Define o comando que será executado quando o container iniciar
+CMD ["./app"]
+
+
