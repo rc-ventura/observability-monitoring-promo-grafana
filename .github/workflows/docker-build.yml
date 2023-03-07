@@ -18,5 +18,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
+        dockerfile: ./build/Dockerfile
         push: true
         tags: rcventura/pet-shop:latest
+
