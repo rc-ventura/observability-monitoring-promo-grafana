@@ -5,7 +5,8 @@ FROM harbor.sflabs.com.br/processo/petshop:latest
 WORKDIR /usr/src/app
 
 # Copia o arquivo package.json para a pasta de trabalho
-COPY package*.json ./
+
+COPY package.json /usr/src/app/
 
 #Instala o node e faza atualização
 RUN apk add --update nodejs npm
