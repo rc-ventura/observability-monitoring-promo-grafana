@@ -2,8 +2,7 @@
 
 
 # Define a imagem base que será utilizada
-FROM harbor.sflabs.com.br/processo/petshop:latest
-#FROM golang:1.17-alpine
+FROM golang:1.17-alpine
 
 # Cria um diretório de trabalho para a aplicação
 WORKDIR /app
