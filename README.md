@@ -1,5 +1,8 @@
-# observability-monitoring-promo-node-grafana
-Observabilidade e monitoramento de uma aplicação em Node JS utilizando o prometheus como coletor das métricas. O dashborad foram criados com o Grafana.
+<div align="center">
 
-![Um cachorro fofo](./assets/nova_project_logo.png)
+# GOVA Project
 
+## Go Observability Visualization Analycts
+
+<img src="./assets/logo_gova-project.png" width="800" height="400" alt= "logo de um cachorro com oculos">
+</div>
