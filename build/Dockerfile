@@ -7,6 +7,9 @@ WORKDIR /usr/src/app
 # Copia o arquivo package.json para a pasta de trabalho
 COPY package*.json ./
 
+#Instala o node e faza atualização
+RUN apk add --update nodejs npm
+
 # Instala as dependências
 RUN npm install
 
