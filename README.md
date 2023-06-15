@@ -110,6 +110,12 @@ http://localhost:9090
 
 8. Clique na guia Status e selecione Target.
 
+
+
+https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/d6ee4cab-bbbc-495f-83a0-177012963098
+
+
+
 <img src= "./assets/Prometheus Time Series Collection and Processing Server - Brave 14_06_2023 18_54_20.png" alt= "checando o serviço do prometheus"  />
 
 #### :anger:  Acessando as métricas coletadas do serviços pelo Prometheus
@@ -131,8 +137,7 @@ http://localhost:3000/metrics
 
 ```
 
-
-<img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2018_58_03.png"/>
+<img src="./assets/Prometheus Time Series Collection and Processing Server - Brave 14_06_2023 18_55_15.png"/>
 
 9. Nestas telas podemos visualizar as métricas que foram coletadas pelo Prometheus
 
@@ -172,9 +177,16 @@ Obs: Lembrando que no docker compose configuramos para host a porta 80 e no cont
 
     ```
 
-    <img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2019_00_10.png"/>
+    
+
+https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/05e21733-46b3-45a4-adab-8d84bd4c5d27
+
+
+
+   <img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2019_00_10.png"/>
 
    - Após preencher as configurações, clique em "Save & Test" (Salvar e Testar) para verificar se a conexão com a fonte de dados foi estabelecida com sucesso.
+   - Selecione Build Dashboard para criar seu primeiro painel.
 
 3. Criando um Dashboard:
    - No menu lateral do Grafana, clique em "Create" (Criar) e selecione "Dashboard" (Painel).
@@ -185,6 +197,12 @@ Obs: Lembrando que no docker compose configuramos para host a porta 80 e no cont
    - Personalize a aparência do painel, como o título, intervalo de tempo e tipo de gráfico, usando as opções fornecidas pelo Grafana.
    - Para adicionar mais painéis ao dashboard, repita as etapas acima.
    - Ao concluir a criação do dashboard, clique em "Save" (Salvar) no canto superior direito e forneça um nome para o dashboard.
+  
+     
+
+https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/62edf18f-cdd2-4ae5-a935-5dd230393ba7
+
+
 
 4. Navegando entre Dashboards:
    - Para acessar os dashboards criados, você pode usar o menu lateral do Grafana. Clique em "Dashboards" (Painéis) para ver uma lista de todos os dashboards disponíveis.
@@ -195,7 +213,7 @@ Obs: Lembrando que no docker compose configuramos para host a porta 80 e no cont
    - Explore as opções fornecidas pelo Grafana para ajustar a aparência, layout e recursos do seu dashboard de acordo com suas necessidades.
 
 
-![dashboards criados](./assets/New%20dashboard%20-%20Dashboards%20-%20Grafana%20-%20Brave%202023-06-14%2019-49-14.mp4o/do/video.mp4)
+https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/febd9c0d-e3cd-470a-857c-9cf010482324
 
 
 #### :anger:  Importando os Dashborads no Grafana
@@ -227,8 +245,8 @@ Obs: Lembrando que no docker compose configuramos para host a porta 80 e no cont
    - Após a importação, você será redirecionado para a página do dashboard recém-importado.
    - Verifique se todas as visualizações, painéis e configurações estão corretas.
 
-   ![importando dashboards](./assets/Grafana%20-%20Brave%202023-06-15%2018-06-59.mp4)
 
+https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/75ac2b5c-fcf9-4f46-ab59-20df7e207cec
 
 
 ## :airplane: Roadmap
