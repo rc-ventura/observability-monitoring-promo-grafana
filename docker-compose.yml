@@ -1,89 +1,47 @@
-
 version: '3'
 
-
 services:
-
   prometheus:
-
-    image: prom/prometheus
-    
+    image: prom/prometheus:main
     container_name: prometheus
-    
     ports:
-
       - 9090:9090
-
     volumes:
-
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     depends_on:
-
       - node-exporter
       - petshop
-
     networks:
-
       - monitoring
-
 
   node-exporter:
-
-    image: prom/node-exporter
-    
+    image: prom/node-exporter:master
     container_name: node-exporter
-
     ports:
-
       - 9100:9100
-
     networks:
-
       - monitoring
-
 
   petshop:
-
     image: harbor.sflabs.com.br/processo/petshop:latest
-    
     container_name: petshop
-
     ports:
-
       - 3000:3000
-
     networks:
-
       - monitoring
-
-
 
   grafana:
-
-    image: grafana/grafana:latest
-    
+    image: grafana/grafana:main
     container_name: grafana
-
     ports:
-
-      - 4000:3000
-    
+      - 80:3000
     volumes:
-
-      - grafana_data:/var/lib/grafana
-
-
+      - ./grafana/grafana_data:/var/lib/grafana
     networks:
-
       - monitoring
 
-
 volumes:
-
   grafana_data:
-   
-   
-networks:
 
+networks:
   monitoring:

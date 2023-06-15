@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 15s  # Intervalo de scraping padrão para coleta de métricas.
+
+  # Rótulos adicionados a todas as séries temporais ou alertas ao se comunicar
+  # com sistemas externos (federation, remote storage, Alertmanager).
+  external_labels:
+    monitor: 'codelab-monitor'
+
+scrape_configs:
+  # Configuração de scraping para o Prometheus.
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['prometheus:9090']  # Endereço do serviço Prometheus para coleta de métricas.
+
+  # Configuração de scraping para o Node Exporter.
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']  # Endereço do serviço Node Exporter para coleta de métricas.
+
+  # Configuração de scraping para a aplicação Petshop.
+  - job_name: 'petshop'
+    static_configs:
+      - targets: ['petshop:3000']  # Endereço do serviço Petshop para coleta de métricas.
