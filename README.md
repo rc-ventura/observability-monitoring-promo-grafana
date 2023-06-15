@@ -13,6 +13,7 @@
 
 Este repositório contém os arquivos e instruções necessários para configurar uma stack de observabilidade, utilizando Prometheus, Node Exporter, Grafana e uma aplicação em Go que simula um petshop. O objetivo dessa atividade é coletar métricas, criar dashboards e alertas para monitorar e analisar o desempenho da aplicação bem como implantar todo ecossistema criado localmente em um servidor remoto na AWS em produção utilizando o Ansible.
 
+<Br>
 
 ## :smile: Status do Projeto
 
@@ -26,23 +27,21 @@ As instruções a seguir são destinadas a ambientes de teste e desenvolvimento.
 
 ### 📋 As tecnologias de pré-requisitos:
 
+
+* **Docker**: É necessário ter o Docker instalado em seu ambiente para executar os componentes da stack em containers isolados. O Docker permite a criação, execução e gerenciamento de containers de aplicativos. 
 <Br>
 
-**Docker**: É necessário ter o Docker instalado em seu ambiente para executar os componentes da stack em containers isolados. O Docker permite a criação, execução e gerenciamento de containers de aplicativos. 
+* **Docker Compose**: O Docker Compose é uma ferramenta que facilita a especificação e execução de vários containers em conjunto. Ele permite definir a configuração e as dependências dos containers em um arquivo YAML, simplificando o processo de execução da stack de observabilidade.
 <Br>
 
-**Docker Compose**: O Docker Compose é uma ferramenta que facilita a especificação e execução de vários containers em conjunto. Ele permite definir a configuração e as dependências dos containers em um arquivo YAML, simplificando o processo de execução da stack de observabilidade.
+* **Linux**: A atividade e as instruções fornecidas pressupõem o uso de um sistema operacional Linux. Certifique-se de ter um ambiente Linux configurado e funcional para executar as etapas descritas.
 <Br>
 
-**Linux**: A atividade e as instruções fornecidas pressupõem o uso de um sistema operacional Linux. Certifique-se de ter um ambiente Linux configurado e funcional para executar as etapas descritas.
+* **Ansible**: O Ansible é uma ferramenta de automação que permite configurar e provisionar recursos de maneira consistente em servidores remotos. Será utilizado para criar um playbook Ansible que automatizará a implantação da stack de observabilidade em um servidor remoto AWS.
 <Br>
 
-**Ansible**: O Ansible é uma ferramenta de automação que permite configurar e provisionar recursos de maneira consistente em servidores remotos. Será utilizado para criar um playbook Ansible que automatizará a implantação da stack de observabilidade em um servidor remoto AWS.
-<Br>
+* **Amazon Web Services**: É necessário ter acesso a um servidor remoto na plataforma AWS (Amazon Web Services) para implantar a stack de observabilidade em produção. Isso envolve a configuração de um servidor remoto na AWS e o acesso a ele usando chaves SSH públicas.
 
-**Amazon Web Services**: É necessário ter acesso a um servidor remoto na plataforma AWS (Amazon Web Services) para implantar a stack de observabilidade em produção. Isso envolve a configuração de um servidor remoto na AWS e o acesso a ele usando chaves SSH públicas.
-
-<Br>
 
 ### 🔧 Instalação
 
@@ -53,7 +52,7 @@ As instruções a seguir são destinadas a ambientes de teste e desenvolvimento.
 
 
 ```
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/rc-ventura/nome-do-repositorio.git
 ```
 
 #### :anger:  Instalando o Docker
@@ -84,9 +83,11 @@ docker-compose up -d
 
 ```
 
-<img alt= screen da saida do docker compose>
+<img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51.png" alt= "screen da saida do docker compose para pull das imagens" />
 
 5. Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker
+
+<img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51i.png" alt = "screen de saída do docker compose para criação dos containers "/>
 
 6. Aguarde até que todos os serviços sejam inicializados. Verifique se os containers estão em execução:
 
@@ -95,7 +96,7 @@ docker-compose up -d
 docker-compose ps
 
 ```
-<img alt= screen da tela dos containers criado>
+<img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_53_29.png" alt = "screen de saída do docker compose para checar os containers running "/>
 
 #### :anger:  Acessar o serviço do Prometheus
 <hr>
@@ -106,7 +107,10 @@ docker-compose ps
 http://localhost:9090
 
 ```
-<img alt= "checando o serviço do prometheus >
+
+8. Clique na guia Status e selecione Target.
+
+<img src= "./assets/Prometheus Time Series Collection and Processing Server - Brave 14_06_2023 18_54_20.png" alt= "checando o serviço do prometheus"  />
 
 #### :anger:  Acessando as métricas coletadas do serviços pelo Prometheus
 <hr>
@@ -119,7 +123,7 @@ http://localhost:9010/metrics
 
 ```
 
-<img>
+<img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2018_55_38.png"/>
 
 
 ```
@@ -127,12 +131,15 @@ http://localhost:3000/metrics
 
 ```
 
-<img>
+
+<img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2018_58_03.png"/>
+
+9. Nestas telas podemos visualizar as métricas que foram coletadas pelo Prometheus
 
 #### :anger:  Configurar o Grafana
 <hr>
 
-9. Acesse o Grafana para visualizar as métricas em painéis.  No navegador, vá para:
+10. Acesse o Grafana para visualizar as métricas em painéis. No navegador, vá para:
 
 
 ```
@@ -140,16 +147,16 @@ http://localhost:80/
 
 ```
 
-10. Lembrando que no docker compose configuramos para host a porta 80 e no container a porta 3000. Dito isso ao fazer uma requisição http o docker redireciona a requisição para a porta 3000 no container onde é executado o serviço do grafana.
+Obs: Lembrando que no docker compose configuramos para host a porta 80 e no container a porta 3000. Dito isso ao fazer uma requisição http o docker redireciona a requisição para a porta 3000 no container onde é executado o serviço do grafana.
 
-<img>
+<img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2018_58_03.png"/>
 
 #### :anger:  Criando os Dashborads no Grafana
 <hr>
 
 1. Acesse o Grafana:
    - Insira suas credenciais de login para acessar o Grafana. 
-   - Vá na pasta grafana e busque o arquivo credenciais.txt
+   - Vá na pasta grafana e busque o arquivo <a href="*"> credenciais.txt </a>
 
 2. Adicionando uma fonte de dados (Data Source):
    - No painel de controle do Grafana, clique em "Configuration" (Configuração) no menu lateral.
@@ -158,11 +165,14 @@ http://localhost:80/
    - Escolha o tipo de fonte de dados que deseja adicionar.
    - Adicione a fonte de dados Prometheus
    - Configure as informações necessárias para se conectar à fonte de dados. Isso pode incluir o endereço, autenticação e outras configurações específicas da fonte de dados.
-   - Apenas modifique o endereço de conexão.
+   - Apenas modifique o endereço de conexão para:
+
     ```
       http://prometheus:9090/
 
     ```
+
+    <img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2019_00_10.png"/>
 
    - Após preencher as configurações, clique em "Save & Test" (Salvar e Testar) para verificar se a conexão com a fonte de dados foi estabelecida com sucesso.
 
@@ -184,6 +194,8 @@ http://localhost:80/
    - Além de adicionar consultas de métricas, o Grafana oferece várias opções de personalização para os dashboards. Você pode adicionar painéis, gráficos, tabelas, alertas e outros componentes para exibir as métricas e informações de forma visualmente atraente.
    - Explore as opções fornecidas pelo Grafana para ajustar a aparência, layout e recursos do seu dashboard de acordo com suas necessidades.
 
+
+![dashboards criados](./assets/New%20dashboard%20-%20Dashboards%20-%20Grafana%20-%20Brave%202023-06-14%2019-49-14.mp4o/do/video.mp4)
 
 
 #### :anger:  Importando os Dashborads no Grafana
@@ -207,13 +219,16 @@ http://localhost:80/
    - Se necessário, você também pode modificar o nome, pasta de destino e outras opções relacionadas ao dashboard.
 
 5. Importe o Dashboard:
-   - Na pasta grafana e na subpasta dashboard, existe um aqrquivo json Gova Project (link) que pode ser importado. 
+   - Na pasta grafana e na subpasta dashboard, existe um aqrquivo json <a href="#">Gova Project </a> que pode ser importado. 
    - Após selecionar o arquivo JSON e configurar as opções, clique no botão "Import" (Importar) para iniciar o processo de importação.
    - O Grafana irá importar o arquivo JSON do dashboard e criar o dashboard correspondente na sua instância.
 
 6. Verifique o Dashboard:
    - Após a importação, você será redirecionado para a página do dashboard recém-importado.
    - Verifique se todas as visualizações, painéis e configurações estão corretas.
+
+   ![importando dashboards](./assets/Grafana%20-%20Brave%202023-06-15%2018-06-59.mp4)
+
 
 
 ## :airplane: Roadmap
@@ -262,7 +277,7 @@ http://localhost:80/
   
 
   
-  #### :crystal_ball: Docker
+  #### :crystal_ball: Ansible
     
   
   ![----_-Em Construção  ](https://github.com/rc-ventura/opencms-ec2-tomcat-nginx-deployment/assets/87483916/249d676a-b9dd-48bf-ba4e-a9811bb59b2f)
@@ -276,7 +291,7 @@ http://localhost:80/
 
   ![----_-Em Construção  ](https://github.com/rc-ventura/opencms-ec2-tomcat-nginx-deployment/assets/87483916/b24d7d98-f411-45a0-8fe1-a15357b10529)
 
- #### ::palm_tree::  
+ #### ::Dashboards::  
 
 
  #### ::leaves:: 
@@ -293,7 +308,7 @@ http://localhost:80/
 ##### <a href="https://https://docs.docker.com/"> * Docker</a>
 ##### <a href="https://docs.docker.com/compose/"> * Docker Compose </a>
 ##### <a href="https://www.linux.org/"> * Linux </a>
-##### <a href=" https://prometheus.io/docs/"> * Prometheus</a>
+##### <a href="https://prometheus.io/docs/"> * Prometheus</a>
 ##### <a href="https://grafana.com/docs/"> * Grafana </a>
 ##### <a href="https://docs.ansible.com/"> * Ansible </a>
 ##### <a href="https://github.com/prometheus/node_exporter"> * Node Exporter </a>
@@ -312,16 +327,11 @@ http://localhost:80/
 
  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" width="80"  /> 
  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="80">
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" width="80" />
  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" width="80" />
  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" width="80" />
  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" width="80"  />
  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" width="80" />
           
-          
-                
-
-   
 </div>
 
 
