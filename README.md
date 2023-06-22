@@ -89,7 +89,7 @@ $ sudo docker-compose up -d
 
 <img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51i.png" alt = "screen de saída do docker compose para criação dos containers " width="2000" height="200"/>
 
-- Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker especificadas.
+Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker especificadas.
 
 <Br>
 
@@ -141,7 +141,7 @@ http://localhost:3000/metrics
 
 <img src="./assets/Prometheus Time Series Collection and Processing Server - Brave 14_06_2023 18_55_15.png"/>
 
-- Nestas telas podemos visualizar as métricas que foram coletadas pelo Prometheus. 
+Nestas telas podemos visualizar as métricas que foram coletadas pelo Prometheus. 
 
       * Porta 9010 - (Node Exporter)
       * Porta 3000 - (Aplicação em Go)
@@ -158,7 +158,7 @@ http://localhost:80/
 
 Obs: Lembrando que no docker compose configuramos para host (nossa máquina) a porta 80 e no container a porta 3000. Dito isso ao fazer uma requisição http o docker redirecionará o tráfego para a porta 3000 no container onde é executado o serviço do grafana.
 
-    * http://localhost:80 --> http://localhost:3000  (bind de portas)
+     **http://localhost:80 --> http://localhost:3000  (bind de portas)**
 
 <Br>
 
