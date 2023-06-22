@@ -10,7 +10,7 @@ prometheus_config_src: ../prometheus/prometheus.yml
 prometheus_config_dest: ~/deploy/prometheus/prometheus.yml
 
 # docker
-config_file_src: ../docker/docker-compose.yml
+config_file_src: ../deploy/docker-compose.yml
 config_file_dest: ~/deploy/docker-compose.yml
 docker_compose_dir: ~/deploy
 
