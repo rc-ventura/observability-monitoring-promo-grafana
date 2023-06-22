@@ -1,110 +1,77 @@
-- name: Instalação da aplicação e configuração do Prometheus
+- name: Configurando a instãncia EC2 para deploy com Ansible.
   hosts: meuservidor
+  remote_user: ubuntu
   become: true
+  vars_files:
+    - env_vars.yml
 
-  tasks:
-  - name: Instalar Docker
-    become: true
-    apt:
-      name: docker.io
-      state: present
-    register: docker_installation  
+  tasks: 
+    - name: Atualizando o cache
+      apt:
+       update_cache: yes
+
+    - name: instalando Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Instalando o Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Criando um pasta /deploy no servidor remoto
+      file: 
+        path: "{{path_dir_deploy}}"
+        state: directory
       
- # - name: Verificar se Docker foi instalado corretamente
-  #  assert:
-   #   that:
-    #    - docker_installation|changed
-     # fail_msg: "O Docker não foi instalado corretamente."
-     # success_msg: "O Docker foi instalado com sucesso."
-   
-  - name: Instalar Docker Compose
-    become: true
-    apt:
-      name: docker-compose
-      state: present
-    register: docker_compose_installation  
+    - name: Criando um pasta /prometheus no servidor remoto
+      file: 
+        path: "{{path_dir_prometheus}}"
+        state: directory
 
- # - name: Verificar se Docker Compose foi instalado corretamente
-  #  assert:
-   #   that:
-    #    - docker_compose_installation|changed
-    #  fail_msg: "O Docker Compose não foi instalado corretamente."
-     # success_msg: "O Docker Compose foi instalado com sucesso." 
- 
- 
-  - name: Copiar arquivos de configuração dos serviços
-    copy:
-      src: /home/rc-ventura/DevOps/Observability_Monitoring/petshop-app/deploy/docker/docker-deploy.yml
-      dest: /home/rc-ventura/deploy/docker-deploy.yml
-    register: config_copy 
-    
- # - name: Verificar se o arquivo de configuração do Docker Compose foi copiado corretamente
-  #  assert:
-   #   that:
-    #    - config_copy|changed
-     # fail_msg: "O arquivo de configuração do Docker Compose não foi copiado corretamente."
-     # success_msg: "O arquivo de configuração do Docker Compose foi copiado com sucesso."      
-    
+    - name: Criando um pasta /grafana no servidor remoto
+      file: 
+        path: "{{path_dir_grafana}}"
+        state: directory
 
-  - name: Instalar o Prometheus
-    become: true
-    apt:
-      name: prometheus
-      state: present
-    register: prometheus_installation
-    
- # - name: Verificar se o Prometheus foi instalado corretamente
-  #  assert:
-   #   that:
-    #    - prometheus_installation|changed
-     # fail_msg: "O Prometheus não foi instalado corretamente."
-      #success_msg: "O Prometheus foi instalado com sucesso."	
+    - name: Transferindo o arquivo docker-compose.yml para o servidor remoto
+      copy:
+        src: "{{ config_file_src }}"
+        dest: "{{ config_file_dest }}"
+      register: config_copy
 
 
-  - name: Copiar arquivo de configuração do Prometheus
-    copy:
-      src: /home/rc-ventura/DevOps/Observability_Monitoring/petshop-app/deploy/prometheus/prometheus-deploy.yml
-      dest: /etc/prometheus/prometheus-deploy.yml
-    register: prometheus_config_copy    
-    
-  #- name: Verificar se o arquivo de configuração do Prometheus foi copiado corretamente
-   # assert:
-    #  that:
-     #   - prometheus_config_copy|changed
-     # fail_msg: "O arquivo de configuração do Prometheus não foi copiado corretamente."
-     # success_msg: "O arquivo de configuração do Prometheus foi copiado com sucesso."
-  
-  
-  - name: Reiniciar serviço do Prometheus
-    systemd:
-      name: prometheus
-      state: restarted
-    register: prometheus_restart     
-    
- # - name: Verificar se o serviço do Prometheus foi reiniciado corretamente
-  #  assert:
-   #   that:
-    #    - prometheus_restart|changed
-     # fail_msg: "O serviço do Prometheus não foi reiniciado corretamente."
-     # success_msg: "O serviço do Prometheus foi reiniciado com sucesso."
-    
-         
-  - name: Subir containers com Docker Compose
-    command: docker-compose up -d
-    args:
-      chdir: /home/rc-ventura/deploy/
-      
-  - name: Verificar se os containers do Docker Compose foram iniciados corretamente
-    shell: docker ps
-    register: docker_ps
-    changed_when: false
+    - name: Dando permissão de execução ao docker-compose.yml
+      file:
+        path: "{{path_dir_compose}}"
+        mode: u+x
 
-  - name: Verificar se os containers foram iniciados corretamente
-    assert:
-     that:
-      - docker_ps.stdout_lines|length > 1  
-     fail_msg: "Os containers não foram iniciados corretamente."
-     success_msg: "Os containers foram iniciados com sucesso."
+    - name: Copiando o arquivo de configuração do Prometheus
+      copy:
+        src: "{{ prometheus_config_src }}"
+        dest: "{{ prometheus_config_dest }}"
+      register: prometheus_config_copy
 
-      
-      
+    - name: Copiando as pastas para configuração do Grafana
+      synchronize:
+        src: "{{ grafana_config_src }}"
+        dest: "{{ grafana_config_dest }}"
+        mode: push
+
+    - name: Subindo os containers com Docker Compose
+      command: docker-compose up -d
+      args:
+        chdir: "{{ docker_compose_dir }}"
+
+    - name: Verificando se os containers do Docker Compose foram iniciados corretamente
+      shell: docker ps
+      register: docker_ps
+      changed_when: false
+
+    - name: Verificar se os containers foram iniciados corretamente
+      assert:
+        that:
+          - docker_ps.stdout_lines | length > 3
+        fail_msg: "Os containers não foram iniciados corretamente."
+        success_msg: "Os containers foram iniciados com sucesso."
