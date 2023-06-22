@@ -84,10 +84,10 @@ $ sudo apt-get install docker-compose
 $ sudo docker-compose up -d
 ```
 
-<img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51.png" alt= "screen da saida do docker compose para pull das imagens" width="2000" height="200" />
+<img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51.png" alt= "screen da saida do docker compose para pull das imagens"  />
 
 
-<img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51i.png" alt = "screen de saída do docker compose para criação dos containers " width="2000" height="200"/>
+<img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51i.png" alt = "screen de saída do docker compose para criação dos containers " />
 
 - Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker especificadas.
 
@@ -99,7 +99,7 @@ $ sudo docker-compose up -d
 ```
 $ sudo docker ps
 ```
-<img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_53_29.png" alt = "screen de saída do docker compose para checar os containers running " width="2000" height="200"/>
+<img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_53_29.png" alt = "screen de saída do docker compose para checar os containers running " />
 
 #### :anger: Etapa 4:  Acessar o serviço do Prometheus
 <hr>
@@ -284,10 +284,10 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
   - [x] Transferir o arquivo docker-compose.yml para a instância remota.
   - [x] Executar o playbook do Ansible para implantar a stack de observabilidade na instância remota.
 
-- [ ] **Teste e Monitoramento em Produção**
+- [x] **Teste e Monitoramento em Produção**
   - [x] Acessar a instância remota e verificar se a stack de observabilidade foi implantada corretamente.
   - [x] Monitorar as métricas coletadas pelo Prometheus e visualizá-las no Grafana.
-  - [x] Testar a geração de alertas com base nas métricas configuradas.
+  - [ ] Testar a geração de alertas com base nas métricas configuradas.
   - [ ] Realizar ajustes e otimizações com base nos dados de observabilidade coletados.
 
 - [ ] **Documentação Oficial do Repositório**
