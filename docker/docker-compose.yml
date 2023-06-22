@@ -7,7 +7,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ~/deploy/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     depends_on:
       - node-exporter
       - petshop
@@ -31,12 +31,13 @@ services:
       - monitoring
 
   grafana:
-    image: grafana/grafana:main
+    image: grafana/grafana:main-ubuntu
     container_name: grafana
     ports:
       - 80:3000
     volumes:
-      - ./grafana/grafana_data:/var/lib/grafana
+      - ~/deploy/grafana:/var/lib/grafana
+    user: "472:472"
     networks:
       - monitoring
 
