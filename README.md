@@ -42,11 +42,9 @@ As instruções a seguir são destinadas a ambientes de teste e desenvolvimento.
 
 * **Amazon Web Services**: É necessário ter acesso a um servidor remoto na plataforma AWS (Amazon Web Services) para implantar a stack de observabilidade em produção. Isso envolve a configuração de um servidor remoto na AWS e o acesso a ele usando chaves SSH públicas.
 
-
-### 🔧 Instalação
-
 <Br>
 
+### 🔧 Instalação
 #### :anger: Etapa 1: Clonando o repositório:
 <hr>
 
@@ -66,6 +64,8 @@ git clone https://github.com/rc-ventura/nome-do-repositorio.git
 $ sudo curl -fsSL https://get.docker.com -o get-docker.sh yes | sudo sh get-docker.sh 
 
 ```
+<Br>
+
 - Instale o Docker Compose 
 
 
@@ -81,17 +81,15 @@ $ sudo apt-get install docker-compose
 
 
 ```
-docker-compose up -d
+$ sudo docker-compose up -d
 ```
 
 <img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51.png" alt= "screen da saida do docker compose para pull das imagens" width="2000" height="200" />
 
-<Br>
-
-
-- Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker
 
 <img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51i.png" alt = "screen de saída do docker compose para criação dos containers " width="2000" height="200"/>
+
+- Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker especificadas.
 
 <Br>
 
@@ -99,7 +97,7 @@ docker-compose up -d
 
 
 ```
-docker-compose ps
+$ sudo docker ps
 ```
 <img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_53_29.png" alt = "screen de saída do docker compose para checar os containers running " width="2000" height="200"/>
 
@@ -199,7 +197,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
    <img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2019_00_10.png"/>
 
 
-   
+
 
 3. Criando um Dashboard:
    - No menu lateral do Grafana, clique em "Create" (Criar) e selecione "Dashboard" (Painel).
