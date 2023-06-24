@@ -1,7 +1,7 @@
 ---
 # deploy
 path_dir_deploy: ~/deploy
-path_dir_compose: ~/deploy/docker-compose.yml
+path_dir_compose: ~/deploy/docker-compose-deploy.yml
 
 # prometheus
 path_dir_prometheus: ~/deploy/prometheus
@@ -10,8 +10,8 @@ prometheus_config_src: ../prometheus/prometheus.yml
 prometheus_config_dest: ~/deploy/prometheus/prometheus.yml
 
 # docker
-config_file_src: ../deploy/docker-compose.yml
-config_file_dest: ~/deploy/docker-compose.yml
+config_file_src: ../deploy/docker-compose-deploy.yml
+config_file_dest: ~/deploy/docker-compose-deploy.yml
 docker_compose_dir: ~/deploy
 
 # grafana

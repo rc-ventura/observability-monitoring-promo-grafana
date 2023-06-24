@@ -304,14 +304,167 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
   
   <Br>
   
+  <img src= "./assets/deploy_automatizado_ansible.drawio.png" alt="imagem do design do deploy" />
 
   
   #### :crystal_ball: Ansible
     
-  
-  ![----_-Em Construção  ](https://github.com/rc-ventura/opencms-ec2-tomcat-nginx-deployment/assets/87483916/249d676a-b9dd-48bf-ba4e-a9811bb59b2f)
 
-    
+## Tutorial de Instalação do Ansible na Máquina Local
+
+### 1. Verifique os requisitos de sistema
+
+Antes de iniciar a instalação, verifique se sua máquina atende aos requisitos de sistema do Ansible:
+
+- Sistema operacional: Ansible é compatível com Linux, macOS e Windows (usando o subsistema Windows para Linux).
+- Python: Ansible requer Python 3.6 ou superior.
+
+### 2. Instale o Python
+
+Se o Python não estiver instalado na sua máquina, siga as etapas apropriadas para instalar o Python de acordo com o sistema operacional.
+
+- **Linux**: O Python geralmente já está instalado na maioria das distribuições Linux. Verifique executando o comando `python3 --version` no terminal.
+
+- **Windows**: Baixe o instalador do Python a partir do site oficial do Python (https://www.python.org/downloads/) e execute-o para instalar o Python. Certifique-se de marcar a opção "Adicionar Python ao PATH" durante a instalação.
+
+### 3. Instale o Ansible
+
+Agora que o Python está instalado, podemos prosseguir com a instalação do Ansible.
+
+#### Opção 1: Instalação via gerenciador de pacotes
+
+- **Linux**: Use o gerenciador de pacotes do seu sistema para instalar o Ansible. Por exemplo, no Ubuntu, execute o comando:
+
+```
+$ sudo apt update
+$ sudo apt install ansible
+```
+
+- **Windows**: Como o Ansible não é nativamente suportado no Windows, você pode usar o subsistema Windows para Linux (WSL). Instale uma distribuição do WSL, como o Ubuntu, e siga as etapas para instalação no Linux.
+
+#### Opção 2: Instalação via pip (gerenciador de pacotes do Python)
+
+Se você preferir, pode instalar o Ansible usando o pip, o gerenciador de pacotes do Python.
+
+- Abra o terminal ou prompt de comando e execute o seguinte comando:
+
+```
+$ pip install ansible
+```
+
+### 4. Verifique a instalação
+
+Após a instalação, verifique se o Ansible está corretamente instalado na sua máquina.
+
+- Abra o terminal ou prompt de comando e execute o seguinte comando:
+
+```
+$ ansible --version
+```
+
+Isso exibirá a versão do Ansible instalada, confirmando que a instalação foi concluída com sucesso.
+
+
+Certifique-se de consultar a documentação oficial do Ansible (https://docs.ansible.com/) para aprender mais sobre como usar o Ansible e explorar suas diversas funcionalidades. 
+ 
+
+
+## Documentação de Implantação
+
+### 1. Configurando a instância EC2 para deploy com Ansible
+
+- Certifique-se de ter uma instância EC2 criada e acessível. Caso tenha alguma dificuldade de configurar uma instância EC2. Visite a documentação ofical da AWS, na seção documentação <a href="">
+
+### 2. Editando o arquivo ansible.cfg
+
+- Após a instalação do Ansible liste o conteúdo da pasta:
+
+```
+$ sudo ls /etc/ansible
+```
+- Edite o arquivo  `ansible.cfg`:
+
+```
+$ sudo nano /etc/ansible/ansible.cfg
+```
+- Ao abrir o arquivo, edite as configurações globais do ansible.cfg utilizando como modelo o <a href="#" > ansible.cfg </a>homônimo presente na pasta ansible no repositório.  
+
+- Salve com Ctl + O e depois para sair Ctl + X
+
+
+### 3. Editando o arquivo hosts.ini (Inventário)
+
+- No arquivo `hosts.ini`, adicione o endereço IP ou o DNS público da sua instância EC2 sob o grupo `[meuservidor]`.
+
+Exemplo:
+```
+[meuservidor]
+meu_ip_ou_dns_publico  ansible_ssh_private_key_file=/caminho/para/a/chave_ssh
+```
+
+### 4. Editando o arquivo env_vars.yml (Variáveis)
+
+- No arquivo `env_vars.yml`, defina as seguintes variáveis:
+
+- Caso você não queira modificar nenhuma variável se sinta confortável para avançar o tutorial para a próxima seção: Executando o playbook. Apenas se atente a possíveis problemas quanto ao caminho das variáveis locais (localmente) de sua máquina.
+
+#### Deploy
+- `path_dir_deploy`: Caminho para a pasta de deploy no servidor remoto.
+
+#### Prometheus
+- `path_dir_prometheus`: Caminho para a pasta do Prometheus no servidor remoto.
+- `prometheus_config_src`: Caminho do arquivo `prometheus.yml` localmente.
+- `prometheus_config_dest`: Caminho de destino do arquivo `prometheus.yml` no servidor remoto.
+
+#### Docker
+- `config_file_src`: Caminho do arquivo `docker-compose.yml` localmente.
+- `config_file_dest`: Caminho de destino do arquivo `docker-compose.yml` no servidor remoto.
+- `docker_compose_dir`: Diretório onde o `docker-compose.yml` será colocado no servidor remoto.
+
+#### Grafana
+- `path_dir_grafana`: Caminho para a pasta do Grafana no servidor remoto.
+- `grafana_config_src`: Caminho da pasta de configuração do Grafana localmente.
+- `grafana_config_dest`: Caminho de destino da pasta de configuração do Grafana no servidor remoto.
+
+ 
+### 5. Executando o playbook
+
+- Navegue até a pasta:
+
+```
+$ cd /etc/ansible
+```
+- Defina uma variável de ambiente para o camimho do playbook ansible:
+
+```
+$ export PATH_TO_PLAYBOOK_ANSIBLE= caminho-para-o-playbook-ansible
+
+```
+Exemplo:
+
+```
+$ export PATH_TO_PLAYBOOK_ANSIBLE= /mnt/c/Users/RC_Ve/Downloads
+```
+
+- Execute o playbook do Ansible com o seguinte comando:
+
+```
+$ sudo ansible-playbook -i hosts ${PATH_TO_PLAYBOOK_ANSIBLE}/ansible_playbook.yml
+```
+
+<img src="./assets/root%40DESKTOP-I3F5REI_%20_etc_ansible%2021_06_2023%2021_13_29.png">
+
+
+Isso iniciará a configuração do servidor remoto com o Docker, Docker Compose e os serviços especificados no arquivo `deploy-compose.yml` na pasta /deploy, como Prometheus, Node Exporter, Grafana e Petshop.
+
+Após a execução bem-sucedida do playbook, verifique se os containers foram iniciados corretamente executando o comando `docker ps` no servidor remoto.
+
+<img src="./assets/EC2%20Instance%20Connect%20-%20Brave%2021_06_2023%2021_14_13.png">
+
+Acesse o Grafana em `http://seu_ip_ou_dns_publico` para fazer o login e visualizar os dados monitorados pelo Prometheus.
+
+Certifique-se de ajustar as configurações conforme necessário para o seu ambiente específico.
+
   #### :mag: Métricas 
   
  ![----_-Em Construção  ](https://github.com/rc-ventura/opencms-ec2-tomcat-nginx-deployment/assets/87483916/7025d250-223d-40e0-9cae-2284ec976905)
@@ -320,10 +473,10 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
 
   ![----_-Em Construção  ](https://github.com/rc-ventura/opencms-ec2-tomcat-nginx-deployment/assets/87483916/b24d7d98-f411-45a0-8fe1-a15357b10529)
 
- #### ::Dashboards::  
+ #### :Dashboards:  
 
 
- #### ::leaves:: 
+ #### :leaves: 
     
 
 

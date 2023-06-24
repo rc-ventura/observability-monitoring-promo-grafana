@@ -35,14 +35,14 @@
         path: "{{path_dir_grafana}}"
         state: directory
 
-    - name: Transferindo o arquivo docker-compose.yml para o servidor remoto
+    - name: Transferindo o arquivo docker-compose-deploy.yml para o servidor remoto
       copy:
         src: "{{ config_file_src }}"
         dest: "{{ config_file_dest }}"
       register: config_copy
 
 
-    - name: Dando permissão de execução ao docker-compose.yml
+    - name: Dando permissão de execução ao docker-compose-deploy.yml
       file:
         path: "{{path_dir_compose}}"
         mode: u+x
@@ -60,7 +60,7 @@
         mode: push
 
     - name: Subindo os containers com Docker Compose
-      command: docker-compose up -d
+      command: docker-compose -f deploy-compose-deploy.yml up -d
       args:
         chdir: "{{ docker_compose_dir }}"
 
