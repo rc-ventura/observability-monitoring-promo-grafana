@@ -294,7 +294,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
   - [x] Criar uma documentação oficial para o repositório, incluindo instruções de instalação, configuração e uso da stack de observabilidade.
   - [x] Incluir links úteis para recursos relacionados, como documentação do Prometheus, Grafana e Ansible.
   - [ ] Acrescentar exemplos de consultas Prometheus e configurações avançadas no Grafana.
-  - [ ] Garantir que a documentação esteja atualizada e seja de fácil acesso para os usuários.
+  - [x] Garantir que a documentação esteja atualizada e seja de fácil acesso para os usuários.
 
 
 
@@ -309,7 +309,8 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
   
     
 
-## :crystal_ball: Tutorial de Instalação do Ansible na Máquina Local
+### :crystal_ball: Tutorial de Instalação do Ansible na Máquina Local
+<hr>
 
 ### 1. Verifique os requisitos de sistema
 
@@ -368,7 +369,9 @@ Certifique-se de consultar a documentação oficial do Ansible (https://docs.ans
  
 
 
-## :crystal_ball: Documentação de Implantação
+### :crystal_ball: Documentação de Implantação
+<hr>
+
 
 ### 1. Configurando a instância EC2 para deploy com Ansible
 
@@ -454,22 +457,26 @@ $ sudo ansible-playbook -i hosts ${PATH_TO_PLAYBOOK_ANSIBLE}/ansible_playbook.ym
 <img src="./assets/root%40DESKTOP-I3F5REI_%20_etc_ansible%2021_06_2023%2021_13_29.png">
 
 
-Isso iniciará a configuração do servidor remoto com o Docker, Docker Compose e os serviços especificados no arquivo `deploy-compose.yml` na pasta /deploy, como Prometheus, Node Exporter, Grafana e Petshop.
+Isso iniciará a configuração do servidor remoto com o Docker, Docker Compose e os serviços especificados no arquivo `docker-compose-deploy.yml` como Prometheus, Node Exporter, Grafana e Petshop.
 
 Após a execução bem-sucedida do playbook, verifique se os containers foram iniciados corretamente executando o comando `docker ps` no servidor remoto.
 
+```
+ sudo $ docker ps
+```
 <img src="./assets/EC2%20Instance%20Connect%20-%20Brave%2021_06_2023%2021_14_13.png">
 
 Acesse o Grafana em `http://seu_ip_ou_dns_publico` para fazer o login e visualizar os dados monitorados pelo Prometheus.
 
 Certifique-se de ajustar as configurações conforme necessário para o seu ambiente específico.
 
-  ## :mag: Métricas 
+### :mag: Métricas 
+<hr>
 
-  ### Node-Exporter
-  #### Memória:
+### Node-Exporter
+#### Memória:
 
-- Essas métricas permitem monitorar o consumo de memória do sistema e identificar possíveis problemas de falta de memória ou gargalos.
+Essas métricas permitem monitorar o consumo de memória do sistema e identificar possíveis problemas de falta de memória ou gargalos.
 
    - **node_memory_MemTotal**: Indica a quantidade total de memória física do sistema.
    - **node_memory_MemFree**: Indica a quantidade de memória livre disponível no sistema.
@@ -483,7 +490,7 @@ Certifique-se de ajustar as configurações conforme necessário para o seu ambi
    - **node_memory_SwapTotal**: Indica o tamanho total da partição de swap.
    - **node_memory_SwapFree**: Indica a quantidade de espaço livre na partição de swap.
 
-  #### CPU:
+#### CPU:
 
 Essas métricas permitem monitorar o uso da CPU no sistema, identificando o tempo gasto em diferentes modos e fornecendo insights sobre a carga de trabalho da CPU e possíveis gargalos de desempenho.
 
@@ -494,12 +501,12 @@ Essas métricas permitem monitorar o uso da CPU no sistema, identificando o temp
    - **node_cpu_irq_seconds_total**: Tempo total da CPU gasto em tratamento de interrupções (IRQ).
    - **node_cpu_softirq_seconds_total**: Tempo total da CPU gasto em tratamento de interrupções de software (softirq).
    - **node_cpu_steal_seconds_total**: Tempo total da CPU gasto em operações de "steal" em ambientes virtualizados.
--   **node_cpu_guest_seconds_total**: Tempo total da CPU gasto em tarefas executadas no modo convidado (guest).
+   - **node_cpu_guest_seconds_total**: Tempo total da CPU gasto em tarefas executadas no modo convidado (guest).
    - **node_cpu_guest_nice_seconds_total**: Tempo total da CPU gasto em tarefas executadas no modo convidado com prioridade "nice" (guest_nice).
 
-  #### Carga de trabalho:
+#### Carga de trabalho:
 
-  * Essas métricas permitem monitorar a carga média do sistema ao longo do tempo e ajudam a identificar períodos de pico de atividade ou carga excessiva, auxiliando na capacidade de planejamento e na detecção de possíveis problemas de desempenho.
+Essas métricas permitem monitorar a carga média do sistema ao longo do tempo e ajudam a identificar períodos de pico de atividade ou carga excessiva, auxiliando na capacidade de planejamento e na detecção de possíveis problemas de desempenho.
 
    - **node_load1**: Indica a carga média do sistema nos últimos 1 minuto. Essa métrica reflete a quantidade média de processos em execução ou aguardando em fila durante o último minuto.
 
