@@ -27,6 +27,7 @@ As instruções a seguir são destinadas a ambientes de teste e desenvolvimento.
 
 ### 📋 As tecnologias de pré-requisitos:
 
+<Br>
 
 * **Docker**: É necessário ter o Docker instalado em seu ambiente para executar os componentes da stack em containers isolados. O Docker permite a criação, execução e gerenciamento de containers de aplicativos. 
 <Br>
@@ -42,7 +43,6 @@ As instruções a seguir são destinadas a ambientes de teste e desenvolvimento.
 
 * **Amazon Web Services**: É necessário ter acesso a um servidor remoto na plataforma AWS (Amazon Web Services) para implantar a stack de observabilidade em produção. Isso envolve a configuração de um servidor remoto na AWS e o acesso a ele usando chaves SSH públicas.
 
-<Br>
 
 ### 🔧 Instalação
 #### :anger: Etapa 1: Clonando o repositório:
@@ -89,7 +89,7 @@ $ sudo docker-compose up -d
 
 <img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51i.png" alt = "screen de saída do docker compose para criação dos containers " />
 
-Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker especificadas.
+- Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker especificadas.
 
 <Br>
 
@@ -121,7 +121,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
 
 <img src= "./assets/Prometheus Time Series Collection and Processing Server - Brave 14_06_2023 18_54_20.png" alt= "checando o serviço do prometheus"  />
 
-#### :anger: Eatapa 5:  Acessando as métricas coletadas do serviços pelo Prometheus
+#### :anger: Etapa 5:  Acessando as métricas coletadas do serviços pelo Prometheus
 <hr>
 
 - Acesse as métricas coletadas pelo Prometheus do Node Exporter e da aplicação em Go. Abra o navegador e vá para:
@@ -141,7 +141,7 @@ http://localhost:3000/metrics
 
 <img src="./assets/Prometheus Time Series Collection and Processing Server - Brave 14_06_2023 18_55_15.png"/>
 
-Nestas telas podemos visualizar as métricas que foram coletadas pelo Prometheus. 
+- Nestas telas podemos visualizar as métricas que foram coletadas pelo Prometheus. 
 
       * Porta 9010 - (Node Exporter)
       * Porta 3000 - (Aplicação em Go)
@@ -307,10 +307,9 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
   <img src= "./assets/deploy_automatizado_ansible.drawio.png" alt="imagem do design do deploy" />
 
   
-  #### :crystal_ball: Ansible
     
 
-## Tutorial de Instalação do Ansible na Máquina Local
+## :crystal_ball: Tutorial de Instalação do Ansible na Máquina Local
 
 ### 1. Verifique os requisitos de sistema
 
@@ -369,7 +368,7 @@ Certifique-se de consultar a documentação oficial do Ansible (https://docs.ans
  
 
 
-## Documentação de Implantação
+## :crystal_ball: Documentação de Implantação
 
 ### 1. Configurando a instância EC2 para deploy com Ansible
 
@@ -465,19 +464,59 @@ Acesse o Grafana em `http://seu_ip_ou_dns_publico` para fazer o login e visualiz
 
 Certifique-se de ajustar as configurações conforme necessário para o seu ambiente específico.
 
-  #### :mag: Métricas 
-  
- ![----_-Em Construção  ](https://github.com/rc-ventura/opencms-ec2-tomcat-nginx-deployment/assets/87483916/7025d250-223d-40e0-9cae-2284ec976905)
+  ## :mag: Métricas 
+
+  ### Node-Exporter
+  #### Memória:
+
+- Essas métricas permitem monitorar o consumo de memória do sistema e identificar possíveis problemas de falta de memória ou gargalos.
+
+   - **node_memory_MemTotal**: Indica a quantidade total de memória física do sistema.
+   - **node_memory_MemFree**: Indica a quantidade de memória livre disponível no sistema.
+   - **node_memory_MemAvailable**: Indica a quantidade de memória disponível para aplicativos e processos.
+   - **node_memory_Buffers**: Indica a quantidade de memória usada como cache de buffers do sistema.
+   - **node_memory_Cached**: Indica a quantidade de memória usada como cache de páginas de arquivo.
+   - **node_memory_Slab**: Indica a quantidade de memória usada para metadados do kernel, como caches de objetos de kernel e estruturas de dados alocadas pelo kernel.
+   - **node_memory_Shmem**: Indica a quantidade de memória compartilhada.
+   - **node_memory_SReclaimable**: Indica a quantidade de memória que pode ser recuperada (reclaimable) pelo sistema quando necessário.
+   - **node_memory_SwapCached**: Indica a quantidade de memória usada como cache de páginas de swap.
+   - **node_memory_SwapTotal**: Indica o tamanho total da partição de swap.
+   - **node_memory_SwapFree**: Indica a quantidade de espaço livre na partição de swap.
+
+  #### CPU:
+
+Essas métricas permitem monitorar o uso da CPU no sistema, identificando o tempo gasto em diferentes modos e fornecendo insights sobre a carga de trabalho da CPU e possíveis gargalos de desempenho.
+
+   - **node_cpu_user_seconds_total**: Tempo total da CPU gasto no modo de processamento do usuário.
+   - **node_cpu_system_seconds_total**: Tempo total da CPU gasto no modo de processamento do sistema.
+   - **node_cpu_idle_seconds_total**: Tempo total da CPU ociosa, ou seja, sem atividade.
+   - **node_cpu_iowait_seconds_total**: Tempo total da CPU aguardando por operações de entrada e saída (I/O).
+   - **node_cpu_irq_seconds_total**: Tempo total da CPU gasto em tratamento de interrupções (IRQ).
+   - **node_cpu_softirq_seconds_total**: Tempo total da CPU gasto em tratamento de interrupções de software (softirq).
+   - **node_cpu_steal_seconds_total**: Tempo total da CPU gasto em operações de "steal" em ambientes virtualizados.
+-   **node_cpu_guest_seconds_total**: Tempo total da CPU gasto em tarefas executadas no modo convidado (guest).
+   - **node_cpu_guest_nice_seconds_total**: Tempo total da CPU gasto em tarefas executadas no modo convidado com prioridade "nice" (guest_nice).
+
+  #### Carga de trabalho:
+
+  * Essas métricas permitem monitorar a carga média do sistema ao longo do tempo e ajudam a identificar períodos de pico de atividade ou carga excessiva, auxiliando na capacidade de planejamento e na detecção de possíveis problemas de desempenho.
+
+   - **node_load1**: Indica a carga média do sistema nos últimos 1 minuto. Essa métrica reflete a quantidade média de processos em execução ou aguardando em fila durante o último minuto.
+
+   - **node_load5**: Indica a carga média do sistema nos últimos 5 minutos. Essa métrica é uma média da carga do sistema ao longo dos últimos 5 minutos e fornece uma visão mais estável da carga de trabalho do que a métrica de 1 minuto.
+
+   - **node_load15**: Indica a carga média do sistema nos últimos 15 minutos. Essa métrica é uma média da carga do sistema ao longo dos últimos 15 minutos e é útil para identificar tendências de carga de longo prazo.
+
+
 
  #### :computer: Alertas
 
   ![----_-Em Construção  ](https://github.com/rc-ventura/opencms-ec2-tomcat-nginx-deployment/assets/87483916/b24d7d98-f411-45a0-8fe1-a15357b10529)
 
- #### :Dashboards:  
+ #### :leaves: Dashboards:  
 
-
- #### :leaves: 
-    
+   <img src="./assets/Gova%20Project%20-%20Dashboards%20-%20Grafana%20-%20Brave%2021_06_2023%2022_49_26.png" />
+   <img src="./assets/Gova%20Project%20-%20Dashboards%20-%20Grafana%20-%20Brave%2021_06_2023%2022_49_36.png" />
 
 
 

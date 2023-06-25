@@ -105,3 +105,6 @@ dist
 
 # Grafana
 /grafana/grafana_data
+
+# VsCode
+.vdcode/
