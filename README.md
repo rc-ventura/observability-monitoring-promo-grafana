@@ -144,6 +144,7 @@ http://localhost:9010/metrics
 ```
 http://localhost:3000/metrics
 ```
+<Br>
 
 <img src="./assets/Prometheus Time Series Collection and Processing Server - Brave 14_06_2023 18_55_15.png"/>
 
@@ -166,7 +167,9 @@ Obs: Lembrando que no docker compose configuramos para host (nossa máquina) a p
 
 <Br>
 
-**http://localhost:80 --> http://localhost:3000  (bind de portas)**
+```
+ **http://localhost:80 --> http://localhost:3000  (bind de portas)**
+```
 
 <Br>
 
@@ -197,6 +200,8 @@ Obs: Lembrando que no docker compose configuramos para host (nossa máquina) a p
 
     - Após preencher as configurações, clique em "Save & Test" (Salvar e Testar) para verificar se a conexão com a fonte de dados foi estabelecida com sucesso.
    - Selecione Build Dashboard para criar seu primeiro painel.
+
+   <Br>
 
 https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/05e21733-46b3-45a4-adab-8d84bd4c5d27
 
@@ -321,9 +326,8 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
     
 
 ## :crystal_ball: Tutorial de Instalação do Ansible na Máquina Local
-<hr>
 
-### :crystal_ball: 1. Verifique os requisitos de sistema
+### :anger: 1. Verifique os requisitos de sistema
 <hr>
 
 Antes de iniciar a instalação, verifique se sua máquina atende aos requisitos de sistema do Ansible:
@@ -331,17 +335,17 @@ Antes de iniciar a instalação, verifique se sua máquina atende aos requisitos
 - **Sistema operacional**: Ansible é compatível com Linux, macOS e Windows (usando o subsistema Windows para Linux).
 - **Python**: Ansible requer Python 3.6 ou superior.
 
-### :crystal_ball: 2. Instale o Python
+### :anger: 2. Instale o Python
 
 <hr>
 
-- Se o Python não estiver instalado na sua máquina, siga as etapas apropriadas para instalar o Python de acordo com o sistema operacional.
+Se o Python não estiver instalado na sua máquina, siga as etapas apropriadas para instalar o Python de acordo com o sistema operacional.
 
 - **Linux**: O Python geralmente já está instalado na maioria das distribuições Linux. Verifique executando o comando `python3 --version` no terminal.
 
 - **Windows**: Baixe o instalador do Python a partir do site oficial do Python (https://www.python.org/downloads/) e execute-o para instalar o Python. Certifique-se de marcar a opção "Adicionar Python ao PATH" durante a instalação.
 
-### :crystal_ball: 3. Instale o Ansible
+### :anger: 3. Instale o Ansible
 
 <hr>
 
@@ -360,6 +364,7 @@ $ sudo apt install ansible
 - **Windows**: Como o Ansible não é nativamente suportado no Windows, você pode usar o subsistema Windows para Linux (WSL). Instale uma distribuição do WSL, como o Ubuntu, e siga as etapas para instalação no Linux.
 
 <Br>
+
 #### Opção 2: Instalação via pip (gerenciador de pacotes do Python)
 
 Se você preferir, pode instalar o Ansible usando o pip, o gerenciador de pacotes do Python.
@@ -372,7 +377,7 @@ Se você preferir, pode instalar o Ansible usando o pip, o gerenciador de pacote
 $ sudo pip install ansible
 ```
 
-### :crystal_ball: 4. Verifique a instalação
+### :anger: 4. Verifique a instalação
 
 <hr>
 
@@ -392,19 +397,17 @@ Isso exibirá a versão do Ansible instalada, confirmando que a instalação foi
 
 Certifique-se de consultar a documentação oficial do Ansible (https://docs.ansible.com/) para aprender mais sobre como usar o Ansible e explorar suas diversas funcionalidades. 
  
-<Br>
 
 ## :leaves: Documentação de Implantação
-<hr>
 
 
-### :leaves: 1. Configurando a instância EC2 para deploy com Ansible
+### :anger: 1. Configurando a instância EC2 para deploy com Ansible
 
 <hr>
 
 - Certifique-se de ter uma instância EC2 criada e acessível. Caso tenha alguma dificuldade de configurar uma instância EC2. Visite a  <a href="https://docs.aws.amazon.com"> documentação ofical da AWS. </a>
 
-### 2. Editando o arquivo ansible.cfg
+### :anger: 2. Editando o arquivo ansible.cfg
 
 <hr>
 
@@ -420,24 +423,26 @@ $ sudo ls /etc/ansible
 ```
 $ sudo nano /etc/ansible/ansible.cfg
 ```
-- Ao abrir o arquivo, edite as configurações globais do ansible.cfg utilizando como modelo o <a href="https://github.com/rc-ventura/observability-monitoring-promo-grafana/blob/master/ansible/ansible.cfg" > ansible.cfg </a> presente na pasta <a href="https://github.com/rc-ventura/observability-monitoring-promo-grafana/tree/master/ansible">ansible no repositório </a>.  
+- Ao abrir o arquivo, edite as configurações globais do ansible.cfg utilizando como modelo o <a href="https://github.com/rc-ventura/observability-monitoring-promo-grafana/blob/master/ansible/ansible.cfg" > ansible.cfg </a> presente na pasta <a href="https://github.com/rc-ventura/observability-monitoring-promo-grafana/tree/master/ansible">ansible no repositório. </a>  
 
 - Salve com Ctl + O e depois para sair Ctl + X
 
+<Br>
 
-### :leaves: 3. Editando o arquivo hosts.ini (Inventário)
+### :anger: 3. Editando o arquivo hosts.ini (Inventário)
 
 <hr>
 
 - No arquivo `hosts.ini`, adicione o endereço IP ou o DNS público da sua instância EC2 sob o grupo `[meuservidor]`.
 
-Exemplo:
+**Exemplo:**
 ```
 [meuservidor]
 meu_ip_ou_dns_publico  ansible_ssh_private_key_file=/caminho/para/a/chave_ssh
 ```
 
-### 4. Editando o arquivo env_vars.yml (Variáveis)
+### :anger: 4. Editando o arquivo env_vars.yml (Variáveis)
+<hr>
 
 - No arquivo `env_vars.yml`, defina as seguintes variáveis:
 
@@ -461,7 +466,7 @@ meu_ip_ou_dns_publico  ansible_ssh_private_key_file=/caminho/para/a/chave_ssh
 - `grafana_config_dest`: Caminho de destino da pasta de configuração do Grafana no servidor remoto.
 
 Caso você não queira modificar nenhuma variável se sinta confortável para avançar o tutorial para a próxima seção: Executando o playbook. Apenas se atente a possíveis problemas quanto ao caminho das variáveis locais (localmente) de sua máquina.
-### :leaves: 5. Executando o playbook
+### :anger: 5. Executando o playbook
 <hr>
 
 - Navegue até a pasta:
@@ -477,7 +482,7 @@ $ cd /etc/ansible
 $ export PATH_TO_PLAYBOOK_ANSIBLE=caminho-para-o-playbook-ansible
 
 ```
-- Exemplo:
+**Exemplo:**
 
 ```
 $ export PATH_TO_PLAYBOOK_ANSIBLE= C:\Users\Usuario_Exemplo\Downloads\observability-monitoring-promo-grafana-1.1.0/ansible
@@ -506,6 +511,8 @@ $ sudo ansible-playbook -i hosts ${PATH_TO_PLAYBOOK_ANSIBLE}/ansible_playbook.ym
 ```
  sudo $ docker ps
 ```
+<Br>
+
 <img src="./assets/EC2%20Instance%20Connect%20-%20Brave%2021_06_2023%2021_14_13.png">
 
 <Br>
