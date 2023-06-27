@@ -44,8 +44,8 @@ As instruções a seguir são destinadas a ambientes de teste e desenvolvimento.
 * **Amazon Web Services**: É necessário ter acesso a um servidor remoto na plataforma AWS (Amazon Web Services) para implantar a stack de observabilidade em produção. Isso envolve a configuração de um servidor remoto na AWS e o acesso a ele usando chaves SSH públicas.
 
 
-### 🔧 Instalação
-#### :anger: Etapa 1: Clonando o repositório:
+## 🔧 Instalação
+### :anger: Etapa 1: Clonando o repositório:
 <hr>
 
 - Clone este repositório em sua máquina local utilizando o seguinte comando:
@@ -55,7 +55,7 @@ As instruções a seguir são destinadas a ambientes de teste e desenvolvimento.
 git clone https://github.com/rc-ventura/nome-do-repositorio.git
 ```
 
-#### :anger: Etapa 2: Instalando o Docker
+### :anger: Etapa 2: Instalando o Docker
 <hr>
 
 - Instale o Docker em sua máquina utilizando o script oficial Docker
@@ -74,7 +74,7 @@ $ sudo apt-get install docker-compose
 
 ```
 
-#### :anger: Etapa 3: Executar o Docker Compose
+### :anger: Etapa 3: Executar o Docker Compose
 <hr>
  
 - Navegue até o diretório do repositório clonado em sua máquina e execute o Docker Compose com o seguinte comando:
@@ -89,6 +89,8 @@ $ sudo docker-compose up -d
 
 <img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51i.png" alt = "screen de saída do docker compose para criação dos containers " />
 
+<Br>
+
 - Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker especificadas.
 
 <Br>
@@ -101,7 +103,7 @@ $ sudo docker ps
 ```
 <img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_53_29.png" alt = "screen de saída do docker compose para checar os containers running " />
 
-#### :anger: Etapa 4:  Acessar o serviço do Prometheus
+### :anger: Etapa 4:  Acessar o serviço do Prometheus
 <hr>
 
 - Acesse o Prometheus para verificar a coleta de métricas. Abra o navegador e vá para:
@@ -113,7 +115,7 @@ http://localhost:9090
 
 - Clique na guia Status e selecione Target. Como o vídeo abaixo:
 
-
+<Br>
 
 https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/d6ee4cab-bbbc-495f-83a0-177012963098
 
@@ -121,7 +123,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
 
 <img src= "./assets/Prometheus Time Series Collection and Processing Server - Brave 14_06_2023 18_54_20.png" alt= "checando o serviço do prometheus"  />
 
-#### :anger: Etapa 5:  Acessando as métricas coletadas do serviços pelo Prometheus
+### :anger: Etapa 5:  Acessando as métricas coletadas do serviços pelo Prometheus
 <hr>
 
 - Acesse as métricas coletadas pelo Prometheus do Node Exporter e da aplicação em Go. Abra o navegador e vá para:
@@ -130,6 +132,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
 ```
 http://localhost:9010/metrics
 ```
+<Br>
 
 <img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2018_55_38.png"/>
 
@@ -146,7 +149,7 @@ http://localhost:3000/metrics
       * Porta 9010 - (Node Exporter)
       * Porta 3000 - (Aplicação em Go)
 
-#### :anger: Etapa 6:  Configurar o Grafana
+### :anger: Etapa 6:  Configurar o Grafana
 <hr>
 
 - Acesse o Grafana para visualizar as métricas em painéis. No navegador, vá para:
@@ -158,13 +161,14 @@ http://localhost:80/
 
 Obs: Lembrando que no docker compose configuramos para host (nossa máquina) a porta 80 e no container a porta 3000. Dito isso ao fazer uma requisição http o docker redirecionará o tráfego para a porta 3000 no container onde é executado o serviço do grafana.
 
+<Br>
      **http://localhost:80 --> http://localhost:3000  (bind de portas)**
 
 <Br>
 
 <img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2018_58_03.png"/>
 
-#### :anger: Etapa 7:  Criando os Dashborads no Grafana
+### :anger: Etapa 7:  Criando os Dashborads no Grafana
 <hr>
 
 1. Acesse o Grafana:
@@ -192,12 +196,12 @@ Obs: Lembrando que no docker compose configuramos para host (nossa máquina) a p
 
 https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/05e21733-46b3-45a4-adab-8d84bd4c5d27
 
-
+<Br>
 
    <img src="./assets/Prometheus%20Time%20Series%20Collection%20and%20Processing%20Server%20-%20Brave%2014_06_2023%2019_00_10.png"/>
 
 
-
+<Br>
 
 3. Criando um Dashboard:
    - No menu lateral do Grafana, clique em "Create" (Criar) e selecione "Dashboard" (Painel).
@@ -209,7 +213,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
    - Para adicionar mais painéis ao dashboard, repita as etapas acima.
    - Ao concluir a criação do dashboard, clique em "Save" (Salvar) no canto superior direito e forneça um nome para o dashboard.
   
-     
+     <Br>
 
 https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/62edf18f-cdd2-4ae5-a935-5dd230393ba7
 
@@ -227,7 +231,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
 https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/febd9c0d-e3cd-470a-857c-9cf010482324
 
 
-#### :anger: Etapa 8:  Importando os Dashborads no Grafana
+### :anger: Etapa 8:  Importando os Dashborads no Grafana
 <hr>
 
 1. Acesse o Grafana:
@@ -256,6 +260,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
    - Após a importação, você será redirecionado para a página do dashboard recém-importado.
    - Verifique se todas as visualizações, painéis e configurações estão corretas.
 
+<Br>
 
 https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/75ac2b5c-fcf9-4f46-ab59-20df7e207cec
 
@@ -290,7 +295,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
   - [ ] Testar a geração de alertas com base nas métricas configuradas.
   - [ ] Realizar ajustes e otimizações com base nos dados de observabilidade coletados.
 
-- [ ] **Documentação Oficial do Repositório**
+- [x] **Documentação Oficial do Repositório**
   - [x] Criar uma documentação oficial para o repositório, incluindo instruções de instalação, configuração e uso da stack de observabilidade.
   - [x] Incluir links úteis para recursos relacionados, como documentação do Prometheus, Grafana e Ansible.
   - [ ] Acrescentar exemplos de consultas Prometheus e configurações avançadas no Grafana.
@@ -309,7 +314,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
   
     
 
-### :crystal_ball: Tutorial de Instalação do Ansible na Máquina Local
+## :crystal_ball: Tutorial de Instalação do Ansible na Máquina Local
 <hr>
 
 ### 1. Verifique os requisitos de sistema
@@ -349,7 +354,7 @@ Se você preferir, pode instalar o Ansible usando o pip, o gerenciador de pacote
 - Abra o terminal ou prompt de comando e execute o seguinte comando:
 
 ```
-$ pip install ansible
+$ sudo pip install ansible
 ```
 
 ### 4. Verifique a instalação
@@ -367,15 +372,15 @@ Isso exibirá a versão do Ansible instalada, confirmando que a instalação foi
 
 Certifique-se de consultar a documentação oficial do Ansible (https://docs.ansible.com/) para aprender mais sobre como usar o Ansible e explorar suas diversas funcionalidades. 
  
+<Br>
 
-
-### :crystal_ball: Documentação de Implantação
+## :crystal_ball: Documentação de Implantação
 <hr>
 
 
 ### 1. Configurando a instância EC2 para deploy com Ansible
 
-- Certifique-se de ter uma instância EC2 criada e acessível. Caso tenha alguma dificuldade de configurar uma instância EC2. Visite a documentação ofical da AWS, na seção documentação <a href="">
+- Certifique-se de ter uma instância EC2 criada e acessível. Caso tenha alguma dificuldade de configurar uma instância EC2. Visite a  <a href="https://docs.aws.amazon.com"> documentação ofical da AWS </a>
 
 ### 2. Editando o arquivo ansible.cfg
 
@@ -389,7 +394,7 @@ $ sudo ls /etc/ansible
 ```
 $ sudo nano /etc/ansible/ansible.cfg
 ```
-- Ao abrir o arquivo, edite as configurações globais do ansible.cfg utilizando como modelo o <a href="#" > ansible.cfg </a>homônimo presente na pasta ansible no repositório.  
+- Ao abrir o arquivo, edite as configurações globais do ansible.cfg utilizando como modelo o <a href="https://github.com/rc-ventura/observability-monitoring-promo-grafana/blob/master/ansible/ansible.cfg" > ansible.cfg </a> presente na pasta <a href="https://github.com/rc-ventura/observability-monitoring-promo-grafana/tree/master/ansible">ansible no repositório </a>.  
 
 - Salve com Ctl + O e depois para sair Ctl + X
 
@@ -408,7 +413,6 @@ meu_ip_ou_dns_publico  ansible_ssh_private_key_file=/caminho/para/a/chave_ssh
 
 - No arquivo `env_vars.yml`, defina as seguintes variáveis:
 
-- Caso você não queira modificar nenhuma variável se sinta confortável para avançar o tutorial para a próxima seção: Executando o playbook. Apenas se atente a possíveis problemas quanto ao caminho das variáveis locais (localmente) de sua máquina.
 
 #### Deploy
 - `path_dir_deploy`: Caminho para a pasta de deploy no servidor remoto.
@@ -428,7 +432,7 @@ meu_ip_ou_dns_publico  ansible_ssh_private_key_file=/caminho/para/a/chave_ssh
 - `grafana_config_src`: Caminho da pasta de configuração do Grafana localmente.
 - `grafana_config_dest`: Caminho de destino da pasta de configuração do Grafana no servidor remoto.
 
- 
+ - Caso você não queira modificar nenhuma variável se sinta confortável para avançar o tutorial para a próxima seção: Executando o playbook. Apenas se atente a possíveis problemas quanto ao caminho das variáveis locais (localmente) de sua máquina.
 ### 5. Executando o playbook
 
 - Navegue até a pasta:
@@ -439,14 +443,17 @@ $ cd /etc/ansible
 - Defina uma variável de ambiente para o camimho do playbook ansible:
 
 ```
-$ export PATH_TO_PLAYBOOK_ANSIBLE= caminho-para-o-playbook-ansible
+$ export PATH_TO_PLAYBOOK_ANSIBLE=caminho-para-o-playbook-ansible
 
 ```
-Exemplo:
+- Exemplo:
 
 ```
-$ export PATH_TO_PLAYBOOK_ANSIBLE= /mnt/c/Users/RC_Ve/Downloads
+$ export PATH_TO_PLAYBOOK_ANSIBLE= C:\Users\Usuario_Exemplo\Downloads\observability-monitoring-promo-grafana-1.1.0/ansible
+
 ```
+<Br>
+
 
 - Execute o playbook do Ansible com o seguinte comando:
 
@@ -456,15 +463,20 @@ $ sudo ansible-playbook -i hosts ${PATH_TO_PLAYBOOK_ANSIBLE}/ansible_playbook.ym
 
 <img src="./assets/root%40DESKTOP-I3F5REI_%20_etc_ansible%2021_06_2023%2021_13_29.png">
 
+<Br>
 
-Isso iniciará a configuração do servidor remoto com o Docker, Docker Compose e os serviços especificados no arquivo `docker-compose-deploy.yml` como Prometheus, Node Exporter, Grafana e Petshop.
+- Isso iniciará a configuração do servidor remoto com o Docker, Docker Compose e os serviços especificados no arquivo `docker-compose-deploy.yml` como Prometheus, Node Exporter, Grafana e Petshop.
 
-Após a execução bem-sucedida do playbook, verifique se os containers foram iniciados corretamente executando o comando `docker ps` no servidor remoto.
+<Br>
+
+- Após a execução bem-sucedida do playbook, verifique se os containers foram iniciados corretamente executando o comando `docker ps` no servidor remoto.
 
 ```
  sudo $ docker ps
 ```
 <img src="./assets/EC2%20Instance%20Connect%20-%20Brave%2021_06_2023%2021_14_13.png">
+
+<Br>
 
 Acesse o Grafana em `http://seu_ip_ou_dns_publico` para fazer o login e visualizar os dados monitorados pelo Prometheus.
 
@@ -473,8 +485,7 @@ Certifique-se de ajustar as configurações conforme necessário para o seu ambi
 ### :mag: Métricas 
 <hr>
 
-### Node-Exporter
-#### Memória:
+### Node-Exporter (Memória)
 
 Essas métricas permitem monitorar o consumo de memória do sistema e identificar possíveis problemas de falta de memória ou gargalos.
 
@@ -490,7 +501,7 @@ Essas métricas permitem monitorar o consumo de memória do sistema e identifica
    - **node_memory_SwapTotal**: Indica o tamanho total da partição de swap.
    - **node_memory_SwapFree**: Indica a quantidade de espaço livre na partição de swap.
 
-#### CPU:
+### Node-Exporter (CPU)
 
 Essas métricas permitem monitorar o uso da CPU no sistema, identificando o tempo gasto em diferentes modos e fornecendo insights sobre a carga de trabalho da CPU e possíveis gargalos de desempenho.
 
@@ -504,7 +515,7 @@ Essas métricas permitem monitorar o uso da CPU no sistema, identificando o temp
    - **node_cpu_guest_seconds_total**: Tempo total da CPU gasto em tarefas executadas no modo convidado (guest).
    - **node_cpu_guest_nice_seconds_total**: Tempo total da CPU gasto em tarefas executadas no modo convidado com prioridade "nice" (guest_nice).
 
-#### Carga de trabalho:
+### Node-Exporter (Carga de Trabalho)
 
 Essas métricas permitem monitorar a carga média do sistema ao longo do tempo e ajudam a identificar períodos de pico de atividade ou carga excessiva, auxiliando na capacidade de planejamento e na detecção de possíveis problemas de desempenho.
 
@@ -515,12 +526,14 @@ Essas métricas permitem monitorar a carga média do sistema ao longo do tempo e
    - **node_load15**: Indica a carga média do sistema nos últimos 15 minutos. Essa métrica é uma média da carga do sistema ao longo dos últimos 15 minutos e é útil para identificar tendências de carga de longo prazo.
 
 
+### Pet Shop
 
- #### :computer: Alertas
+
+ ### :computer: Alertas
 
   ![----_-Em Construção  ](https://github.com/rc-ventura/opencms-ec2-tomcat-nginx-deployment/assets/87483916/b24d7d98-f411-45a0-8fe1-a15357b10529)
 
- #### :leaves: Dashboards:  
+ ### :leaves: Dashboards:  
 
    <img src="./assets/Gova%20Project%20-%20Dashboards%20-%20Grafana%20-%20Brave%2021_06_2023%2022_49_26.png" />
    <img src="./assets/Gova%20Project%20-%20Dashboards%20-%20Grafana%20-%20Brave%2021_06_2023%2022_49_36.png" />
@@ -569,19 +582,19 @@ Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoS
 
 ## 📌 Versão
 
- Para as versões disponíveis, observe as [tags neste repositório](https://github.com/suas/tags/do/projeto). 
+ Para as versões disponíveis, observe as [tags neste repositório](https://github.com/rc-ventura/observability-monitoring-promo-grafana/tags). 
 
 ## ✒️ Autores
 
 Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
-* **Rafael Ventura** - *Responsável técnico* - [Dev Ventura](https://github.com/rc-ventura)
+* **Rafael Ventura** - *Responsável técnico* - [Dev Ventura](https://linkedin.com/in/dev-ventura)
 
 Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
 
 ## 📄 Licença
 
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/rc-ventura/projeto/licenca) para detalhes.
+Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/rc-ventura/observability-monitoring-promo-grafana/blob/master/LICENSE) para detalhes.
 
 ## 🎁 Expressões de gratidão
 
