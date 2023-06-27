@@ -90,6 +90,7 @@ $ sudo docker-compose up -d
 <img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_52_51i.png" alt = "screen de saída do docker compose para criação dos containers " />
 
 <Br>
+<Br>
 
 - Esse comando iniciará os containers do Prometheus e Grafana em segundo plano. Os containers serão criados e configurados automaticamente com as imagens do Docker especificadas.
 
@@ -101,6 +102,8 @@ $ sudo docker-compose up -d
 ```
 $ sudo docker ps
 ```
+<Br>
+
 <img src="./assets/docker-compose.yml%20-%20Gova%20project%20-%20Visual%20Studio%20Code%2014_06_2023%2018_53_29.png" alt = "screen de saída do docker compose para checar os containers running " />
 
 ### :anger: Etapa 4:  Acessar o serviço do Prometheus
@@ -162,7 +165,8 @@ http://localhost:80/
 Obs: Lembrando que no docker compose configuramos para host (nossa máquina) a porta 80 e no container a porta 3000. Dito isso ao fazer uma requisição http o docker redirecionará o tráfego para a porta 3000 no container onde é executado o serviço do grafana.
 
 <Br>
-     **http://localhost:80 --> http://localhost:3000  (bind de portas)**
+
+**http://localhost:80 --> http://localhost:3000  (bind de portas)**
 
 <Br>
 
@@ -202,6 +206,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
 
 
 <Br>
+<Br>
 
 3. Criando um Dashboard:
    - No menu lateral do Grafana, clique em "Create" (Criar) e selecione "Dashboard" (Painel).
@@ -217,7 +222,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
 
 https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/62edf18f-cdd2-4ae5-a935-5dd230393ba7
 
-
+<Br>
 
 4. Navegando entre Dashboards:
    - Para acessar os dashboards criados, você pode usar o menu lateral do Grafana. Clique em "Dashboards" (Painéis) para ver uma lista de todos os dashboards disponíveis.
@@ -227,6 +232,7 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
    - Além de adicionar consultas de métricas, o Grafana oferece várias opções de personalização para os dashboards. Você pode adicionar painéis, gráficos, tabelas, alertas e outros componentes para exibir as métricas e informações de forma visualmente atraente.
    - Explore as opções fornecidas pelo Grafana para ajustar a aparência, layout e recursos do seu dashboard de acordo com suas necessidades.
 
+<Br>
 
 https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/87483916/febd9c0d-e3cd-470a-857c-9cf010482324
 
@@ -317,22 +323,27 @@ https://github.com/rc-ventura/observability-monitoring-promo-grafana/assets/8748
 ## :crystal_ball: Tutorial de Instalação do Ansible na Máquina Local
 <hr>
 
-### 1. Verifique os requisitos de sistema
+### :crystal_ball: 1. Verifique os requisitos de sistema
+<hr>
 
 Antes de iniciar a instalação, verifique se sua máquina atende aos requisitos de sistema do Ansible:
 
-- Sistema operacional: Ansible é compatível com Linux, macOS e Windows (usando o subsistema Windows para Linux).
-- Python: Ansible requer Python 3.6 ou superior.
+- **Sistema operacional**: Ansible é compatível com Linux, macOS e Windows (usando o subsistema Windows para Linux).
+- **Python**: Ansible requer Python 3.6 ou superior.
 
-### 2. Instale o Python
+### :crystal_ball: 2. Instale o Python
 
-Se o Python não estiver instalado na sua máquina, siga as etapas apropriadas para instalar o Python de acordo com o sistema operacional.
+<hr>
+
+- Se o Python não estiver instalado na sua máquina, siga as etapas apropriadas para instalar o Python de acordo com o sistema operacional.
 
 - **Linux**: O Python geralmente já está instalado na maioria das distribuições Linux. Verifique executando o comando `python3 --version` no terminal.
 
 - **Windows**: Baixe o instalador do Python a partir do site oficial do Python (https://www.python.org/downloads/) e execute-o para instalar o Python. Certifique-se de marcar a opção "Adicionar Python ao PATH" durante a instalação.
 
-### 3. Instale o Ansible
+### :crystal_ball: 3. Instale o Ansible
+
+<hr>
 
 Agora que o Python está instalado, podemos prosseguir com a instalação do Ansible.
 
@@ -344,12 +355,16 @@ Agora que o Python está instalado, podemos prosseguir com a instalação do Ans
 $ sudo apt update
 $ sudo apt install ansible
 ```
+<Br>
 
 - **Windows**: Como o Ansible não é nativamente suportado no Windows, você pode usar o subsistema Windows para Linux (WSL). Instale uma distribuição do WSL, como o Ubuntu, e siga as etapas para instalação no Linux.
 
+<Br>
 #### Opção 2: Instalação via pip (gerenciador de pacotes do Python)
 
 Se você preferir, pode instalar o Ansible usando o pip, o gerenciador de pacotes do Python.
+
+<Br>
 
 - Abra o terminal ou prompt de comando e execute o seguinte comando:
 
@@ -357,15 +372,20 @@ Se você preferir, pode instalar o Ansible usando o pip, o gerenciador de pacote
 $ sudo pip install ansible
 ```
 
-### 4. Verifique a instalação
+### :crystal_ball: 4. Verifique a instalação
+
+<hr>
 
 Após a instalação, verifique se o Ansible está corretamente instalado na sua máquina.
+
+<Br>
 
 - Abra o terminal ou prompt de comando e execute o seguinte comando:
 
 ```
 $ ansible --version
 ```
+<Br>
 
 Isso exibirá a versão do Ansible instalada, confirmando que a instalação foi concluída com sucesso.
 
@@ -374,21 +394,27 @@ Certifique-se de consultar a documentação oficial do Ansible (https://docs.ans
  
 <Br>
 
-## :crystal_ball: Documentação de Implantação
+## :leaves: Documentação de Implantação
 <hr>
 
 
-### 1. Configurando a instância EC2 para deploy com Ansible
+### :leaves: 1. Configurando a instância EC2 para deploy com Ansible
 
-- Certifique-se de ter uma instância EC2 criada e acessível. Caso tenha alguma dificuldade de configurar uma instância EC2. Visite a  <a href="https://docs.aws.amazon.com"> documentação ofical da AWS </a>
+<hr>
+
+- Certifique-se de ter uma instância EC2 criada e acessível. Caso tenha alguma dificuldade de configurar uma instância EC2. Visite a  <a href="https://docs.aws.amazon.com"> documentação ofical da AWS. </a>
 
 ### 2. Editando o arquivo ansible.cfg
+
+<hr>
 
 - Após a instalação do Ansible liste o conteúdo da pasta:
 
 ```
 $ sudo ls /etc/ansible
 ```
+<Br>
+
 - Edite o arquivo  `ansible.cfg`:
 
 ```
@@ -399,7 +425,9 @@ $ sudo nano /etc/ansible/ansible.cfg
 - Salve com Ctl + O e depois para sair Ctl + X
 
 
-### 3. Editando o arquivo hosts.ini (Inventário)
+### :leaves: 3. Editando o arquivo hosts.ini (Inventário)
+
+<hr>
 
 - No arquivo `hosts.ini`, adicione o endereço IP ou o DNS público da sua instância EC2 sob o grupo `[meuservidor]`.
 
@@ -432,14 +460,17 @@ meu_ip_ou_dns_publico  ansible_ssh_private_key_file=/caminho/para/a/chave_ssh
 - `grafana_config_src`: Caminho da pasta de configuração do Grafana localmente.
 - `grafana_config_dest`: Caminho de destino da pasta de configuração do Grafana no servidor remoto.
 
- - Caso você não queira modificar nenhuma variável se sinta confortável para avançar o tutorial para a próxima seção: Executando o playbook. Apenas se atente a possíveis problemas quanto ao caminho das variáveis locais (localmente) de sua máquina.
-### 5. Executando o playbook
+Caso você não queira modificar nenhuma variável se sinta confortável para avançar o tutorial para a próxima seção: Executando o playbook. Apenas se atente a possíveis problemas quanto ao caminho das variáveis locais (localmente) de sua máquina.
+### :leaves: 5. Executando o playbook
+<hr>
 
 - Navegue até a pasta:
 
 ```
 $ cd /etc/ansible
 ```
+<Br>
+
 - Defina uma variável de ambiente para o camimho do playbook ansible:
 
 ```
@@ -464,6 +495,7 @@ $ sudo ansible-playbook -i hosts ${PATH_TO_PLAYBOOK_ANSIBLE}/ansible_playbook.ym
 <img src="./assets/root%40DESKTOP-I3F5REI_%20_etc_ansible%2021_06_2023%2021_13_29.png">
 
 <Br>
+<Br>
 
 - Isso iniciará a configuração do servidor remoto com o Docker, Docker Compose e os serviços especificados no arquivo `docker-compose-deploy.yml` como Prometheus, Node Exporter, Grafana e Petshop.
 
@@ -476,6 +508,7 @@ $ sudo ansible-playbook -i hosts ${PATH_TO_PLAYBOOK_ANSIBLE}/ansible_playbook.ym
 ```
 <img src="./assets/EC2%20Instance%20Connect%20-%20Brave%2021_06_2023%2021_14_13.png">
 
+<Br>
 <Br>
 
 Acesse o Grafana em `http://seu_ip_ou_dns_publico` para fazer o login e visualizar os dados monitorados pelo Prometheus.
@@ -529,11 +562,11 @@ Essas métricas permitem monitorar a carga média do sistema ao longo do tempo e
 ### Pet Shop
 
 
- ### :computer: Alertas
+ ### :triangular_flag_on_post: Alertas
 
   ![----_-Em Construção  ](https://github.com/rc-ventura/opencms-ec2-tomcat-nginx-deployment/assets/87483916/b24d7d98-f411-45a0-8fe1-a15357b10529)
 
- ### :leaves: Dashboards:  
+ ### :computer: Dashboards:  
 
    <img src="./assets/Gova%20Project%20-%20Dashboards%20-%20Grafana%20-%20Brave%2021_06_2023%2022_49_26.png" />
    <img src="./assets/Gova%20Project%20-%20Dashboards%20-%20Grafana%20-%20Brave%2021_06_2023%2022_49_36.png" />
@@ -554,7 +587,7 @@ Essas métricas permitem monitorar a carga média do sistema ao longo do tempo e
 ##### <a href="https://docs.ansible.com/"> * Ansible </a>
 ##### <a href="https://github.com/prometheus/node_exporter"> * Node Exporter </a>
 
-## :crystal_ball: Imagens Docker
+## :earth_asia: Imagens Docker
 
 #####  * harbor.sflabs.com.br/processo/petshop:latest (Petshop) - imagem com hospedagem privada
 ##### <a href="https://hub.docker.com/r/prom/prometheus"> * prom/prometheus</a>
